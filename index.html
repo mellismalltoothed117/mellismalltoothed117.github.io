@@ -29,3 +29,682 @@
 </div>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Yoga & Meditasyon</title>
+    
+    <!-- PWA (Progressive Web App) Meta -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0b0b1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <style>
+
+             :root {
+            --bg: #0b0b1a;
+            --card: #18182a;
+            --text: #eaeaff;
+            --accent: #a78bfa;
+            --secondary: #34d399;
+            --border: #2d2d4a;
+            --radius: 20px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+        .container {
+            max-width: 820px;
+            width: 100%;
+            background: var(--card);
+            padding: 25px 20px;
+            border-radius: var(--radius);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+            border: 1px solid var(--border);
+        }
+        h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+        .sub {
+            font-size: 0.95rem;
+            color: #b0b0d0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 14px;
+            margin-bottom: 16px;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+            margin: 12px 0 20px;
+        }
+        .btn {
+            background: var(--border);
+            color: #eee;
+            border: none;
+            padding: 12px 6px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.25s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            touch-action: manipulation;
+        }
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: var(--accent);
+            color: #000;
+        }
+        .btn:active {
+            transform: scale(0.95);
+        }
+        .content-box {
+            background: #121225;
+            border-radius: var(--radius);
+            padding: 25px 20px;
+            border: 1px solid var(--border);
+            margin: 15px 0 25px;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background 0.5s;
+        }
+        .media-wrapper {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            background: #1e1e38;
+            position: relative;
+        }
+        #displayMedia {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s;
+        }
+        .wave-active {
+            animation: wavePulse 2.2s infinite alternate ease-in-out;
+        }
+        @keyframes wavePulse {
+            0% { transform: scale(1); filter: brightness(0.9) drop-shadow(0 0 4px #a78bfa); }
+            100% { transform: scale(1.03); filter: brightness(1.2) drop-shadow(0 0 20px #a78bfa); }
+        }
+        #displayEmoji {
+            font-size: 3.8rem;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        #displayTitle {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 6px;
+        }
+        #displayText {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            text-align: left;
+            max-width: 600px;
+            color: #d0d0f0;
+            background: rgba(255,255,255,0.04);
+            padding: 14px 20px;
+            border-radius: 20px;
+            border-left: 4px solid var(--accent);
+            white-space: pre-line;
+        }
+        .audio-status {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #9999bb;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #555;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .dot.active {
+            background: var(--secondary);
+            box-shadow: 0 0 14px var(--secondary);
+            animation: blink 1.2s infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+        .btn-mute {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: #ccc;
+            padding: 4px 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            touch-action: manipulation;
+        }
+        .btn-mute:hover { background: var(--border); }
+
+        .form-box {
+            background: #10101f;
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            margin-top: 22px;
+            border: 1px solid var(--border);
+        }
+        .form-box h3 {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            font-size: 0.8rem;
+            color: #b0b0d0;
+            margin: 8px 0 3px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            background: #1e1e38;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            color: #fff;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+        input:focus, textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(167,139,250,0.2);
+        }
+        textarea {
+            border-radius: 18px;
+            min-height: 70px;
+            resize: vertical;
+        }
+        .note {
+            font-size: 0.8rem;
+            color: var(--accent);
+            background: rgba(167,139,250,0.08);
+            padding: 4px 14px;
+            border-radius: 40px;
+            display: inline-block;
+            margin: 4px 0 10px;
+            border-left: 2px solid var(--accent);
+        }
+        .btn-submit {
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            padding: 12px;
+            border: none;
+            border-radius: 40px;
+            width: 100%;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.25s;
+            margin-top: 6px;
+            touch-action: manipulation;
+        }
+        .btn-submit:hover {
+            background: var(--secondary);
+            box-shadow: 0 4px 16px rgba(52,211,153,0.3);
+        }
+        .home-link {
+            display: inline-block;
+            margin-top: 16px;
+            color: #8888bb;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-bottom: 1px dotted #555;
+        }
+        .home-link:hover { color: var(--accent); }
+
+        @media (max-width: 480px) {
+            .container { padding: 16px 12px; }
+            h1 { font-size: 1.7rem; }
+            .menu-grid { grid-template-columns: repeat(3,1fr); }
+            .btn { font-size: 0.7rem; padding: 10px 4px; }
+            #displayText { font-size: 0.85rem; padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+ <div class="container" id="mainContainer">
+    <h1>🧘 Yoga & Meditasyon</h1>
+    <div class="sub">Sesli anlatım + görsel slayt + yazılı rehber</div>
+
+    <div class="menu-grid">
+        <button class="btn" data-med="sabah">🌅 Sabah</button>
+        <button class="btn" data-med="gece">🌙 Gece</button>
+        <button class="btn" data-med="yoganidra">🧘 Yoga Nidra</button>
+        <button class="btn" data-med="nefes">🌬️ 4-7-8 Nefes</button>
+        <button class="btn" data-med="chakra">🌈 Çakra</button>
+        <button class="btn" data-med="odak">🎯 Derin Odak</button>
+        <button class="btn" data-med="rehberli">🗣️ Rehberli</button>
+        <button class="btn" data-med="mantra">🔊 Mantra</button>
+        <button class="btn" data-med="vipassana">🕯️ Vipassana</button>
+        <button class="btn" data-med="metta">💖 Metta</button>
+        <button class="btn" data-med="transandantal">🌀 Transandantal</button>
+        <button class="btn" data-med="farkindalik">🌿 Farkındalık</button>
+    </div>
+
+    <div class="content-box" id="contentBox">
+        <div class="media-wrapper">
+            <img id="displayMedia" src="https://picsum.photos/seed/meditation/600/338" alt="Meditasyon">
+        </div>
+        <div id="displayEmoji">🧘</div>
+        <div id="displayTitle">Hazır mısınız?</div>
+        <div id="displayText">Bir butona tıklayın, size adım adım rehberlik edelim.</div>
+        <div class="audio-status">
+            <span class="dot" id="audioDot"></span>
+            <span id="audioLabel">Ses bekleniyor</span>
+            <button class="btn-mute" id="muteBtn">🔇 Müzik Kapalı</button>
+        </div>
+    </div>
+
+    <!-- Yorum -->
+    <div class="form-box">
+        <h3>💬 Yorum Yap</h3>
+        <form id="commentForm">
+            <label>Adınız *</label>
+            <input type="text" id="comName" required placeholder="Ad">
+            <label>Soyadınız (gizli)</label>
+            <input type="text" id="comSurname" placeholder="Soyad">
+            <label>E-posta (gizli, cevap için)</label>
+            <input type="email" id="comEmail" required placeholder="ornek@mail.com">
+            <div class="note">📧 E-posta sadece size dönüş için kullanılır.</div>
+            <label>Yorumunuz *</label>
+            <textarea id="comText" rows="3" required placeholder="Düşünceleriniz..."></textarea>
+            <button class="btn-submit" type="submit">Gönder</button>
+        </form>
+    </div>
+
+    <!-- Soru -->
+    <div class="form-box">
+        <h3>❓ Soru Sor</h3>
+        <form id="questionForm">
+            <label>Adınız *</label>
+            <input type="text" id="qName" required placeholder="Ad">
+            <label>Soyadınız *</label>
+            <input type="text" id="qSurname" required placeholder="Soyad">
+            <label>Cep Telefonu *</label>
+            <input type="tel" id="qPhone" required placeholder="05xx xxx xx xx">
+            <label>E-posta *</label>
+            <input type="email" id="qEmail" required placeholder="ornek@mail.com">
+            <div class="note">📧 Cevap için e-posta adresiniz kullanılacak.</div>
+            <label>Şehir *</label>
+            <input type="text" id="qCity" required placeholder="İstanbul">
+            <label>Yaş *</label>
+            <input type="number" id="qAge" required placeholder="25">
+            <label>Sorunuz *</label>
+            <textarea id="qText" rows="3" required placeholder="Sormak istediğiniz her şey..."></textarea>
+            <button class="btn-submit" type="submit">Gönder</button>
+        </form>
+    </div>
+
+    <a href="index.html" class="home-link">🏠 Ana Sayfaya Dön</a>
+ </div>
+
+ <script>
+    // ---------- MEDİTASYON VERİLERİ ----------
+    const meditations = {
+        sabah: {
+            title: "☀️ Sabah Meditasyonu",
+            text: "1. Rahat bir pozisyonda oturun.\n2. Gözlerinizi kapatın ve 3 derin nefes alın.\n3. Bugün için olumlu bir niyet belirleyin.\n4. Nefesinizi izleyerek 5 dakika boyunca kalın.\n5. Yavaşça gözlerinizi açın ve güne başlayın.",
+            emoji: "🌅",
+            images: [
+                "https://picsum.photos/seed/sabah1/600/338",
+                "https://picsum.photos/seed/sabah2/600/338",
+                "https://picsum.photos/seed/sabah3/600/338"
+            ]
+        },
+        gece: {
+            title: "🌙 Gece Meditasyonu",
+            text: "1. Sırt üstü uzanın, kollarınız yanlarda.\n2. Her nefeste bedeninizin daha da ağırlaştığını hayal edin.\n3. Ayak parmaklarınızdan başlayarak tüm bedeni tarayın.\n4. Her bir bölgeyi bilinçli olarak gevşetin.\n5. 10 dakika boyunca bu gevşeme halinde kalın.",
+            emoji: "🌙",
+            images: [
+                "https://picsum.photos/seed/gece1/600/338",
+                "https://picsum.photos/seed/gece2/600/338",
+                "https://picsum.photos/seed/gece3/600/338"
+            ]
+        },
+        yoganidra: {
+            title: "🧘 Yoga Nidra",
+            text: "1. Sırt üstü yatın, bacaklarınızı hafif açın.\n2. Niyetinizi belirleyin (ör. 'huzur').\n3. Vücut taraması: ayaklar → bacaklar → gövde → kollar → baş.\n4. Her bölgeyi 10 saniye bilinçli olarak hissedin.\n5. 15-20 dakika bu farkındalıkta kalın.",
+            emoji: "🧘‍♀️",
+            images: [
+                "https://picsum.photos/seed/nidra1/600/338",
+                "https://picsum.photos/seed/nidra2/600/338",
+                "https://picsum.photos/seed/nidra3/600/338"
+            ]
+        },
+        nefes: {
+            title: "🌬️ 4-7-8 Nefes Tekniği",
+            text: "1. Burnunuzdan 4 saniye boyunca nefes alın.\n2. Nefesi 7 saniye tutun.\n3. Ağzınızdan 8 saniyede yavaşça verin.\n4. Bu döngüyü 4-8 kez tekrarlayın.\n5. Her tekrarda daha derin bir rahatlama hissedeceksiniz.",
+            emoji: "🌬️",
+            images: [
+                "https://picsum.photos/seed/nefes1/600/338",
+                "https://picsum.photos/seed/nefes2/600/338",
+                "https://picsum.photos/seed/nefes3/600/338"
+            ]
+        },
+        chakra: {
+            title: "🌈 Çakra Dengeleme",
+            text: "1. Kök çakra (kırmızı) – topraklanma.\n2. Sakral çakra (turuncu) – yaratıcılık.\n3. Solar pleksus (sarı) – özgüven.\n4. Kalp çakrası (yeşil) – sevgi.\n5. Boğaz çakrası (mavi) – iletişim.\n6. Üçüncü göz (indigo) – sezgi.\n7. Taç çakra (mor) – bağlantı.\nHer birini birkaç dakika görselleştirin.",
+            emoji: "🌈",
+            images: [
+                "https://picsum.photos/seed/chakra1/600/338",
+                "https://picsum.photos/seed/chakra2/600/338",
+                "https://picsum.photos/seed/chakra3/600/338"
+            ]
+        },
+        odak: {
+            title: "🎯 Derin Odak Pratiği",
+            text: "1. Tek bir nokta belirleyin (nefes, mum alevi veya ses).\n2. Dikkatinizi o noktaya verin.\n3. Aklınıza başka bir şey geldiğinde, yargılamadan tekrar o noktaya dönün.\n4. 5 dakika boyunca bu döngüde kalın.\n5. Zamanla odaklanma süreniz artacaktır.",
+            emoji: "🎯",
+            images: [
+                "https://picsum.photos/seed/odak1/600/338",
+                "https://picsum.photos/seed/odak2/600/338",
+                "https://picsum.photos/seed/odak3/600/338"
+            ]
+        },
+        rehberli: {
+            title: "🗣️ Rehberli Meditasyon",
+            text: "1. Rahat bir yere oturun veya uzanın.\n2. Gözlerinizi kapatın ve sesimi takip edin.\n3. Derin nefes alın, her nefeste daha da gevşeyin.\n4. Şimdi ayaklarınızı, bacaklarınızı, kalçanızı… sırayla gevşetin.\n5. 10 dakika boyunca bu rahatlama yolculuğunda kalın.",
+            emoji: "🗣️",
+            images: [
+                "https://picsum.photos/seed/rehber1/600/338",
+                "https://picsum.photos/seed/rehber2/600/338",
+                "https://picsum.photos/seed/rehber3/600/338"
+            ]
+        },
+        mantra: {
+            title: "🔊 Mantra Meditasyonu",
+            text: "1. 'Om' veya 'So-Ham' gibi bir mantra seçin.\n2. Rahat bir pozisyonda oturun.\n3. Her nefeste mantrayı içinizden tekrar edin.\n4. Nefes alırken 'So', verirken 'Ham' deyin.\n5. 10 dakika boyunca bu ritmi sürdürün.",
+            emoji: "🔊",
+            images: [
+                "https://picsum.photos/seed/mantra1/600/338",
+                "https://picsum.photos/seed/mantra2/600/338",
+                "https://picsum.photos/seed/mantra3/600/338"
+            ]
+        },
+        vipassana: {
+            title: "🕯️ Vipassana (İçgörü)",
+            text: "1. Nefes alıp verişinizi doğal haliyle izleyin.\n2. Vücudunuzdaki her türlü duyumu fark edin (ağrı, kaşıntı, sıcaklık).\n3. Hiçbirine müdahale etmeyin, sadece gözlemleyin.\n4. Zihniniz dağıldığında, tekrar nefese dönün.\n5. 15 dakika boyunca bu farkındalıkta kalın.",
+            emoji: "🕯️",
+            images: [
+                "https://picsum.photos/seed/vipassana1/600/338",
+                "https://picsum.photos/seed/vipassana2/600/338",
+                "https://picsum.photos/seed/vipassana3/600/338"
+            ]
+        },
+        metta: {
+            title: "💖 Metta (Sevgi Dolu İyilik)",
+            text: "1. 'Kendime sevgi ve şefkat diliyorum' deyin.\n2. Sonra sevdiğiniz birini düşünün ve ona iyilik dileyin.\n3. Ardından nötr birine (tanımadığınız biri).\n4. Son olarak tüm canlılara sevgi gönderin.\n5. Her aşamada 1-2 dakika kalın.",
+            emoji: "💖",
+            images: [
+                "https://picsum.photos/seed/metta1/600/338",
+                "https://picsum.photos/seed/metta2/600/338",
+                "https://picsum.photos/seed/metta3/600/338"
+            ]
+        },
+        transandantal: {
+            title: "🌀 Transandantal Meditasyon",
+            text: "1. Kişisel bir mantra seçin (özel bir kelime).\n2. Gözlerinizi kapatın ve mantrayı sessizce tekrarlayın.\n3. Düşünceler geldiğinde, onları geçip giden bulutlar gibi izleyin.\n4. 20 dakika boyunca bu pratiği sürdürün.\n5. Yavaşça odanıza dönün ve gözlerinizi açın.",
+            emoji: "🌀",
+            images: [
+                "https://picsum.photos/seed/trans1/600/338",
+                "https://picsum.photos/seed/trans2/600/338",
+                "https://picsum.photos/seed/trans3/600/338"
+            ]
+        },
+        farkindalik: {
+            title: "🌿 Farkındalık Meditasyonu",
+            text: "1. Oturun ve 5 duyunuzu kullanın (görmek, duymak, koklamak, tatmak, dokunmak).\n2. Nefes alırken vücudunuzdaki hareketi fark edin.\n3. Aklınıza gelen her düşünceyi etiketleyin (düşünce, duygu, his).\n4. Yargılamadan sadece gözlemleyin.\n5. 10 dakika boyunca bu anda kalın.",
+            emoji: "🌿",
+            images: [
+                "https://picsum.photos/seed/fark1/600/338",
+                "https://picsum.photos/seed/fark2/600/338",
+                "https://picsum.photos/seed/fark3/600/338"
+            ]
+        }
+    };
+
+    // ---------- DOM ----------
+    const displayMedia = document.getElementById('displayMedia');
+    const displayEmoji = document.getElementById('displayEmoji');
+    const displayTitle = document.getElementById('displayTitle');
+    const displayText = document.getElementById('displayText');
+    const audioDot = document.getElementById('audioDot');
+    const audioLabel = document.getElementById('audioLabel');
+    const contentBox = document.getElementById('contentBox');
+    const muteBtn = document.getElementById('muteBtn');
+
+    let bgMusic = null;
+    let isMuted = true;
+    let speaking = false;
+    let slideInterval = null;
+    let currentSlide = 0;
+
+    // ---------- SAKİN FON MÜZİĞİ (telifsiz) ----------
+    const MUSIC_URL = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+
+    function initMusic() {
+        if (!bgMusic) {
+            bgMusic = new Audio(MUSIC_URL);
+            bgMusic.loop = true;
+            bgMusic.volume = 0.2;
+        }
+        if (!isMuted) {
+            bgMusic.play().catch(() => {
+                audioLabel.textContent = '⚠️ Müzik yüklenemedi.';
+            });
+            muteBtn.textContent = '🔊 Müzik Açık';
+        } else {
+            if (bgMusic) bgMusic.pause();
+            muteBtn.textContent = '🔇 Müzik Kapalı';
+        }
+    }
+
+    muteBtn.addEventListener('click', function() {
+        isMuted = !isMuted;
+        initMusic();
+    });
+
+    // ---------- GÖRSEL HATA YÖNETİMİ ----------
+    function handleImageError(img) {
+        img.onerror = null;
+        img.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338"%3E%3Crect fill="%232a2a4a" width="600" height="338"/%3E%3Ctext x="300" y="169" font-family="Arial" font-size="20" fill="%23999" text-anchor="middle" dy=".3em"%3EGörsel yüklenemedi%3C/text%3E%3C/svg%3E';
+    }
+
+    // ---------- SLAYT GÖSTERİSİ ----------
+    function startSlideShow(images) {
+        if (slideInterval) clearInterval(slideInterval);
+        if (!images || images.length === 0) {
+            displayMedia.src = 'https://picsum.photos/seed/default/600/338';
+            return;
+        }
+        currentSlide = 0;
+        displayMedia.src = images[0];
+        displayMedia.onerror = function() { handleImageError(this); };
+        slideInterval = setInterval(() => {
+            currentSlide = (currentSlide + 1) % images.length;
+            displayMedia.src = images[currentSlide];
+            displayMedia.onerror = function() { handleImageError(this); };
+        }, 3500);
+    }
+
+    // ---------- MEDİTASYON AÇ ----------
+    function openMeditation(type) {
+        if (speaking) {
+            window.speechSynthesis.cancel();
+            speaking = false;
+        }
+
+        const data = meditations[type];
+        if (!data) return;
+
+        startSlideShow(data.images);
+
+        displayEmoji.textContent = data.emoji || '🧘';
+        displayTitle.textContent = data.title;
+        displayText.textContent = data.text;
+
+        const hue = (type.length * 28) % 360;
+        contentBox.style.background = `radial-gradient(circle at 30% 30%, rgba(${hue},80,120,0.15), #121225)`;
+
+        audioDot.className = 'dot active';
+        audioLabel.textContent = '🔊 Sesli anlatım başlıyor...';
+
+        const utterance = new SpeechSynthesisUtterance(data.text);
+        utterance.lang = 'tr-TR';
+        utterance.rate = 0.95;
+        utterance.pitch = 1;
+        utterance.onstart = function() {
+            speaking = true;
+            audioDot.className = 'dot active';
+            audioLabel.textContent = '🗣️ Anlatılıyor...';
+        };
+        utterance.onend = function() {
+            speaking = false;
+            audioDot.className = 'dot';
+            audioLabel.textContent = '✅ Anlatım bitti.';
+        };
+        utterance.onerror = function() {
+            speaking = false;
+            audioDot.className = 'dot';
+            audioLabel.textContent = '⚠️ Ses okuma hatası.';
+        };
+
+        window.speechSynthesis.speak(utterance);
+
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.style.background = (btn.dataset.med === type) ? 'var(--accent)' : 'var(--border)';
+            btn.style.color = (btn.dataset.med === type) ? '#000' : '#eee';
+        });
+    }
+
+    // ---------- BUTONLARA TIKLAMA ----------
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const type = this.dataset.med;
+            if (type) openMeditation(type);
+        });
+    });
+
+    // ---------- FORM GÖNDERİMLERİ ----------
+    document.getElementById('commentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('comEmail').value;
+        if (!email.includes('@')) { alert('Geçerli e-posta girin.'); return; }
+        alert('💬 Yorumunuz gönderildi!');
+        this.reset();
+    });
+
+    document.getElementById('questionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('qEmail').value;
+        if (!email.includes('@')) { alert('Geçerli e-posta girin.'); return; }
+        alert('❓ Sorunuz iletildi. En kısa sürede dönüş yapılacak.');
+        this.reset();
+    });
+
+    // ---------- SERVICE WORKER (PWA) ----------
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+            .then(() => console.log('SW kaydedildi.'))
+            .catch(() => console.log('SW kaydedilemedi.'));
+    }
+
+    // ---------- BAŞLANGIÇ ----------
+    displayMedia.src = 'https://picsum.photos/seed/default/600/338';
+    displayMedia.onerror = function() { handleImageError(this); };
+</script>
+</body>
+</html>
+
+{
+  "name": "Yoga ve Meditasyon",
+  "short_name": "Meditasyon",
+  "description": "Sesli rehberli meditasyon pratikleri",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0b0b1a",
+  "theme_color": "#0b0b1a",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
+const CACHE_NAME = 'meditasyon-v1';
+const FILES = [
+    'index.html',
+    'manifest.json',
+    'icon-192.png',
+    'icon-512.png'
+];
+
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then(cache => cache.addAll(FILES))
+            .then(() => self.skipWaiting())
+    );
+});
+
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(keys => {
+            return Promise.all(
+                keys.filter(key => key !== CACHE_NAME)
+                    .map(key => caches.delete(key))
+            );
+        }).then(() => self.clients.claim())
+    );
+});
+
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.match(event.request)
+            .then(response => response || fetch(event.request))
+    );
+});
