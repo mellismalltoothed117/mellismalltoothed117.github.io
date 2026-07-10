@@ -1,259 +1,540 @@
 <a href="index.html">Ana Sayfaya Dön</a>
 
+</label>
 
- </em> düz metin olarak</em> paylaşıyorum.</em>
-```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yoga & Meditasyon</title>
-<style>
- :root {
- --bg-color: #121212;
- --card-bg: #1e1e1e;
- --text-color: #e0e0e0;
- --accent-color: #bb86fc;
- --secondary-color: #03dac6;
- --border-color: #333;
- }
- body {
- background-color: var(--bg-color);
- color: var(--text-color);
- font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
- margin: 0;
- padding: 15px;
- display: flex;
- justify-content: center;
- align-items: center;
- min-height: 100vh;
- box-sizing: border-box;
- }
- .container {
- background-color: var(--card-bg);
- width: 100%;
- max-width: 650px;
- padding: 25px;
- border-radius: 15px;
- box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
- text-align: center;
- }
- h1 { color: var(--accent-color); margin-bottom: 10px; font-size: 1.8rem; }
- p { font-size: 0.95rem; color: #b0b0b0; }
- .menu-grid {
- display: grid;
- grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
- gap: 8px;
- margin-top: 15px;
- }
- .btn {
- background-color: var(--accent-color);
- color: #000;
- padding: 10px 15px;
- border: none;
- border-radius: 6px;
- cursor: pointer;
- font-weight: bold;
- font-size: 0.85rem;
- transition: all 0.3s ease;
- }
- .btn:hover {
- background-color: var(--secondary-color);
- transform: translateY(-2px);
- }
- .content-box {
- margin-top: 25px;
- padding: 20px;
- background-color: #252525;
- border-radius: 10px;
- border: 1px solid var(--border-color);
- }
- .media-display {
- width: 100%;
- max-height: 220px;
- object-fit: cover;
- border-radius: 8px;
- margin-bottom: 15px;
- }
- .pulse-animation {
- animation: pulseGlow 2.5s infinite alternate;
- }
- @keyframes pulseGlow {
- 0% { transform: scale(1); filter: brightness(1); }
- 100% { transform: scale(1.02); filter: brightness(1.15); box-shadow: 0 0 15px rgba(187, 134, 252, 0.4); }
- }
- .form-box {
- margin-top: 25px;
- padding: 20px;
- background-color: #1a1a1a;
- border-radius: 10px;
- border: 1px solid var(--border-color);
- text-align: left;
- }
- .form-box h3 { color: var(--secondary-color); margin-top: 0; margin-bottom: 15px; font-size: 1.1rem; }
- label { font-size: 0.8rem; color: #999; display: block; margin-bottom: 3px; }
- input, textarea {
- width: 100%;
- padding: 9px;
- margin-bottom: 12px;
- border-radius: 5px;
- border: 1px solid #444;
- background-color: #2b2b2b;
- color: #fff;
- box-sizing: border-box;
- font-size: 0.9rem;
- }
- input:focus, textarea:focus {
- border-color: var(--accent-color);
- outline: none;
- }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga & Meditasyon | Sesli Rehberli Pratikler</title>
+    <style>
+        /* ---------- TEMA ---------- */
+        :root {
+            --bg-color: #0b0b1a;
+            --card-bg: #18182a;
+            --text-color: #eaeaff;
+            --accent-color: #a78bfa;
+            --secondary-color: #34d399;
+            --border-color: #2d2d4a;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+            --radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 780px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 30px 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(2px);
+            border: 1px solid var(--border-color);
+            transition: background 0.6s ease;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: #b0b0d0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        /* ---------- MENÜ (butonlar) ---------- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+            margin: 10px 0 18px;
+        }
+
+        .btn {
+            background: var(--border-color);
+            color: #eee;
+            border: none;
+            padding: 12px 6px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: var(--accent-color);
+            color: #000;
+            box-shadow: 0 6px 18px rgba(167, 139, 250, 0.35);
+        }
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        /* ---------- MEDİTASYON KUTUSU ---------- */
+        .content-box {
+            background: #121225;
+            border-radius: var(--radius);
+            padding: 25px 20px;
+            border: 1px solid var(--border-color);
+            margin: 15px 0 25px;
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        /* Görsel alanı */
+        .media-wrapper {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            position: relative;
+            background: #1e1e38;
+        }
+
+        #displayMedia {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        /* Dalga animasyonu (ses çalarken) */
+        .wave-active {
+            animation: wavePulse 2.2s infinite alternate ease-in-out;
+        }
+        @keyframes wavePulse {
+            0% { transform: scale(1); filter: brightness(0.9) drop-shadow(0 0 4px #a78bfa); }
+            100% { transform: scale(1.03); filter: brightness(1.2) drop-shadow(0 0 20px #a78bfa); }
+        }
+
+        /* Emoji & metin */
+        #displayEmoji {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 6px;
+            transition: transform 0.3s;
+        }
+        #displayEmoji.pulse {
+            animation: emojiPulse 1.8s infinite alternate;
+        }
+        @keyframes emojiPulse {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.12) rotate(4deg); }
+        }
+
+        #displayText {
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 550px;
+            color: #d0d0f0;
+            background: rgba(255,255,255,0.03);
+            padding: 12px 18px;
+            border-radius: 40px;
+            border-left: 3px solid var(--accent-color);
+            border-right: 3px solid var(--secondary-color);
+        }
+
+        /* Ses durumu göstergesi */
+        .audio-status {
+            margin-top: 12px;
+            font-size: 0.75rem;
+            color: #9999bb;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .audio-status .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #555;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        .audio-status .dot.active {
+            background: var(--secondary-color);
+            box-shadow: 0 0 12px var(--secondary-color);
+            animation: blink 1.2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        /* ---------- FORMLAR ---------- */
+        .form-box {
+            background: #10101f;
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            margin-top: 25px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+        .form-box h3 {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            color: #b0b0d0;
+            margin: 8px 0 3px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            background: #1e1e38;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            color: #fff;
+            font-size: 0.9rem;
+            transition: border 0.2s;
+            margin-bottom: 6px;
+        }
+        input:focus, textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+        }
+        textarea {
+            border-radius: 18px;
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .note {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            background: rgba(167, 139, 250, 0.08);
+            padding: 6px 14px;
+            border-radius: 40px;
+            display: inline-block;
+            margin: 4px 0 10px;
+            border-left: 2px solid var(--accent-color);
+        }
+
+        .btn-submit {
+            background: var(--accent-color);
+            color: #000;
+            font-weight: 700;
+            padding: 12px;
+            border: none;
+            border-radius: 40px;
+            width: 100%;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            margin-top: 6px;
+        }
+        .btn-submit:hover {
+            background: var(--secondary-color);
+            transform: scale(1.01);
+            box-shadow: 0 4px 16px rgba(52, 211, 153, 0.3);
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 18px;
+            color: #8888bb;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-bottom: 1px dotted #555;
+            transition: color 0.2s;
+        }
+        .home-link:hover {
+            color: var(--accent-color);
+        }
+
+        /* ---------- MOBİL ---------- */
+        @media (max-width: 480px) {
+            .container { padding: 20px 15px; }
+            h1 { font-size: 1.7rem; }
+            .menu-grid { grid-template-columns: repeat(3, 1fr); }
+            .btn { font-size: 0.7rem; padding: 10px 4px; }
+            #displayText { font-size: 0.9rem; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
- <h1>Yoga ve Meditasyon</h1>
- <p>Sesli rehber, yazılı metin ve görsellerle zenginleştirilmiş pratikler.</p>
+<div class="container" id="mainContainer">
 
- <div class="menu-grid">
- <button class="btn" onclick="openMeditation('sabah')">Sabah</button>
- <button class="btn" onclick="openMeditation('gece')">Gece</button>
- <button class="btn" onclick="openMeditation('yoga')">Yoga Nidra</button>
- <button class="btn" onclick="openMeditation('nefes')">4-7-8 Nefes</button>
- <button class="btn" onclick="openMeditation('chakra')">Çakra</button>
- <button class="btn" onclick="openMeditation('odak')">Derin Odak</button>
- </div>
+    <h1>🧘 Yoga & Meditasyon</h1>
+    <p class="subtitle">Sesli rehber, yazılı metin, görseller ve canlı animasyonlarla zengin pratikler.</p>
 
- <div class="content-box">
- <div id="mediaContainer">
- <img id="displayMedia" src="placeholder.jpg" alt="Meditasyon Görseli" class="media-display pulse-animation" style="display:none;">
- </div>
- <div id="displayEmoji" style="font-size:2.8rem; margin-bottom: 8px;">🎧</div>
- <div id="displayText" style="font-size: 0.95rem; line-height: 1.5;">Bir menü butonuna tıklayarak rehberi başlatın.</div>
- </div>
+    <!-- MENÜ BUTONLARI (genişletilmiş) -->
+    <div class="menu-grid">
+        <button class="btn" data-med="sabah">🌅 Sabah</button>
+        <button class="btn" data-med="gece">🌙 Gece</button>
+        <button class="btn" data-med="yoganidra">🧘 Yoga Nidra</button>
+        <button class="btn" data-med="nefes">🌬️ 4-7-8 Nefes</button>
+        <button class="btn" data-med="chakra">🌈 Çakra</button>
+        <button class="btn" data-med="odak">🎯 Derin Odak</button>
+        <button class="btn" data-med="rehberli">🗣️ Rehberli</button>
+        <button class="btn" data-med="mantra">🔊 Mantra</button>
+        <button class="btn" data-med="vipassana">🕯️ Vipassana</button>
+        <button class="btn" data-med="metta">💖 Metta (Sevgi)</button>
+        <button class="btn" data-med="transandantal">🌀 Transandantal</button>
+        <button class="btn" data-med="farkindalik">🌿 Farkındalık</button>
+    </div>
 
- <div class="form-box">
- <h3>Yorum Yap</h3>
- <form id="commentForm">
- <label>Adınız *</label>
- <input type="text" id="comName" required>
- <label>Soyadınız (Gizli Tutulacak) *</label>
- <input type="text" id="comSurname" required>
- <label>E-posta Adresiniz (Gizli Tutulacak) *</label>
- <input type="email" id="comEmail" required>
- <label>Yorumunuz *</label>
- <textarea id="comText" rows="3" required></textarea>
- <button class="btn" type="submit" style="width:100%;">Yorumu Gönder</button>
- </form>
- </div>
+    <!-- MEDİTASYON GÖSTERİM ALANI -->
+    <div class="content-box" id="contentBox">
+        <div class="media-wrapper">
+            <img id="displayMedia" src="https://via.placeholder.com/600x338/2a2a4a/7a7aaa?text=Meditasyon+Görseli" alt="Meditasyon görseli">
+        </div>
+        <div id="displayEmoji">🧘</div>
+        <div id="displayText">Bir meditasyon türü seçin ve rahatlayın.</div>
+        <div class="audio-status">
+            <span class="dot" id="audioDot"></span>
+            <span id="audioLabel">Ses bekleniyor</span>
+        </div>
+    </div>
 
- <div class="form-box">
- <h3>Soru Sor</h3>
- <form id="questionForm">
- <label>Adınız *</label>
- <input type="text" id="qName" required>
- <label>Soyadınız *</label>
- <input type="text" id="qSurname" required>
- <label>Cep Telefonunuz *</label>
- <input type="tel" id="qPhone" required>
- <label>E-posta Adresiniz *</label>
- <input type="email" id="qEmail" required>
- <label>Şehir *</label>
- <input type="text" id="qCity" required>
- <label>Yaşınız *</label>
- <input type="number" id="qAge" required>
- <label>Sorunuz *</label>
- <textarea id="qText" rows="3" required></textarea>
- 
- <label style="color:var(--accent-color);">Not: Sorularınızın size ulaşması için lütfen e-posta adresinizi doğru giriniz.</label>
- 
- <button class="btn" type="submit" style="width:100%;">Soruyu Gönder</button>
- </form>
- </div>
+    <!-- YORUM FORMU -->
+    <div class="form-box">
+        <h3>💬 Yorum Yap</h3>
+        <form id="commentForm">
+            <label>Adınız *</label>
+            <input type="text" id="comName" required placeholder="Ad">
+            <label>Soyadınız (gizli)</label>
+            <input type="text" id="comSurname" placeholder="Soyad">
+            <label>E-posta Adresiniz (gizli, cevap için)</label>
+            <input type="email" id="comEmail" required placeholder="ornek@mail.com">
+            <div class="note">📧 E-posta adresiniz kimseyle paylaşılmaz, sadece size dönüş için kullanılır.</div>
+            <label>Yorumunuz *</label>
+            <textarea id="comText" rows="3" required placeholder="Düşüncelerinizi paylaşın..."></textarea>
+            <button class="btn-submit" type="submit">Yorumu Gönder</button>
+        </form>
+    </div>
 
+    <!-- SORU FORMU -->
+    <div class="form-box">
+        <h3>❓ Soru Sor</h3>
+        <form id="questionForm">
+            <label>Adınız *</label>
+            <input type="text" id="qName" required placeholder="Ad">
+            <label>Soyadınız *</label>
+            <input type="text" id="qSurname" required placeholder="Soyad">
+            <label>Cep Telefonunuz *</label>
+            <input type="tel" id="qPhone" required placeholder="05xx xxx xx xx">
+            <label>E-posta Adresiniz *</label>
+            <input type="email" id="qEmail" required placeholder="ornek@mail.com">
+            <div class="note">📧 Sorunuzun yanıtlanması için e-posta adresiniz kullanılacaktır.</div>
+            <label>Şehir *</label>
+            <input type="text" id="qCity" required placeholder="İstanbul">
+            <label>Yaşınız *</label>
+            <input type="number" id="qAge" required placeholder="25">
+            <label>Sorunuz *</label>
+            <textarea id="qText" rows="3" required placeholder="Sormak istediğiniz her şey..."></textarea>
+            <button class="btn-submit" type="submit">Soruyu Gönder</button>
+        </form>
+    </div>
+
+    <a href="index.html" class="home-link">🏠 Ana Sayfaya Dön</a>
 </div>
 
 <script>
- const meditations = {
- sabah: {
- text: "Sabah Meditasyonu: Güne başlarken 5 dakika boyunca derin nefes alın ve güne pozitif bir niyetle başlayın.",
- emoji: "🌅",
- media: "sabah.jpg",
- audio: "sabah.mp3"
- },
- gece: {
- text: "Gece Meditasyonu: Günün stresini geride bırakın. Bedeninizi gevşeterek huzurlu bir uykuya geçiş yapın.",
- emoji: "🌙",
- media: "gece.jpg",
- audio: "gece.mp3"
- },
- yoga: {
- text: "Yoga Nidra Rehberi: Sırt üstü rahat bir pozisyonda uzanın. Dikkatinizi bedeninizin farklı noktalarına odaklayarak tam bir zihinsel dinlenme sağlayın.",
- emoji: "🧘‍♀️",
- media: "yoga.jpg",
- audio: "yoga.mp3"
- },
- nefes: {
- text: "4-7-8 Nefes Tekniği: 4 saniye nefes alın, 7 saniye tutun ve 8 saniyede yavaşça verin. Sinir sisteminizi anında sakinleştirir.",
- emoji: "🌬️",
- media: "nefes.jpg",
- audio: "nefes.mp3"
- },
- chakra: {
- text: "Çakra Dengeleme: Vücudunuzdaki ana enerji akışını dengelemek ve bloke olmuş enerjileri serbest bırakmak için görselleştirme çalışması.",
- emoji: "🌈",
- media: "chakra.jpg",
- audio: "chakra.mp3"
- },
- odak: {
- text: "Derin Odak Pratiği: Dikkatinizi tek bir noktada toparlayarak zihinsel dağınıklığı ortadan kaldırın ve berraklık kazanın.",
- emoji: "🎯",
- media: "odak.jpg",
- audio: "odak.mp3"
- }
- };
+    // ---------- MEDİTASYON VERİLERİ (genişletilmiş) ----------
+    const meditations = {
+        sabah: {
+            text: "☀️ Sabah Meditasyonu – Güne niyetle başlayın. 5 dakika boyunca derin nefes alın, zihninizi arındırın ve güne pozitif enerjiyle merhaba deyin.",
+            emoji: "🌅",
+            media: "https://via.placeholder.com/600x338/3b2e5a/b39ddb?text=Sabah+Meditasyonu",
+            audio: "sabah.mp3"
+        },
+        gece: {
+            text: "🌙 Gece Meditasyonu – Günün yükünü bırakın. Bedeninizi baştan ayağa gevşetin, zihninizi sakinleştirin ve huzurlu bir uykuya dalın.",
+            emoji: "🌙",
+            media: "https://via.placeholder.com/600x338/1f3a4a/7ec8e3?text=Gece+Meditasyonu",
+            audio: "gece.mp3"
+        },
+        yoganidra: {
+            text: "🧘 Yoga Nidra – Derin bir uyku bilinci. Sırt üstü uzanın, bedenin her bölgesini tarayarak tam bir dinlenme ve yenilenme sağlayın.",
+            emoji: "🧘‍♀️",
+            media: "https://via.placeholder.com/600x338/2e3b3b/9bc4c4?text=Yoga+Nidra",
+            audio: "yoga.mp3"
+        },
+        nefes: {
+            text: "🌬️ 4-7-8 Nefes Tekniği – Sinir sistemini yatıştırır. 4 sn nefes al, 7 sn tut, 8 sn ver. Anksiyeteye karşı etkili ve hızlı rahatlatır.",
+            emoji: "🌬️",
+            media: "https://via.placeholder.com/600x338/2a3a2a/8fc98f?text=4-7-8+Nefes",
+            audio: "nefes.mp3"
+        },
+        chakra: {
+            text: "🌈 Çakra Dengeleme – Vücuttaki 7 ana enerji merkezini uyumlaştırır. Her çakrayı renkleriyle görselleştirerek blokları çözün.",
+            emoji: "🌈",
+            media: "https://via.placeholder.com/600x338/3a1f3a/d48cd4?text=Çakra+Denge",
+            audio: "chakra.mp3"
+        },
+        odak: {
+            text: "🎯 Derin Odak Pratiği – Zihinsel dağınıklığı temizler. Tek bir noktaya (nefes, ses veya görüntü) odaklanarak berrak bir farkındalık kazanın.",
+            emoji: "🎯",
+            media: "https://via.placeholder.com/600x338/2a2a3a/c4b0f0?text=Derin+Odak",
+            audio: "odak.mp3"
+        },
+        rehberli: {
+            text: "🗣️ Rehberli Meditasyon – Deneyimli bir eğitmenin sesiyle adım adım rahatlama. Görseller ve yönlendirmelerle içsel yolculuğa çıkın.",
+            emoji: "🗣️",
+            media: "https://via.placeholder.com/600x338/2a3a4a/a0c0e0?text=Rehberli",
+            audio: "rehberli.mp3"
+        },
+        mantra: {
+            text: "🔊 Mantra Meditasyonu – Tekrar eden kutsal heceler (Om, So-Ham vb.) ile zihni susturup titreşimsel bir dinginlik sağlar.",
+            emoji: "🔊",
+            media: "https://via.placeholder.com/600x338/3a2a2a/dba0a0?text=Mantra",
+            audio: "mantra.mp3"
+        },
+        vipassana: {
+            text: "🕯️ Vipassana – İçgörü meditasyonu. Nefes ve beden duyumlarını gözlemleyerek gerçekliği olduğu gibi kabul etmeyi öğrenin.",
+            emoji: "🕯️",
+            media: "https://via.placeholder.com/600x338/2a2a2a/bbbbbb?text=Vipassana",
+            audio: "vipassana.mp3"
+        },
+        metta: {
+            text: "💖 Metta (Sevgi Dolu İyilik) – Kendinize, sevdiklerinize ve tüm canlılara sevgi ve şefkat gönderin. Kalbi açan bir pratiktir.",
+            emoji: "💖",
+            media: "https://via.placeholder.com/600x338/3a1f2a/d48c9c?text=Metta",
+            audio: "metta.mp3"
+        },
+        transandantal: {
+            text: "🌀 Transandantal Meditasyon – Basit bir mantra ile zihni aşarak saf bilinç durumuna geçin. 20 dakikalık derin dinlenme.",
+            emoji: "🌀",
+            media: "https://via.placeholder.com/600x338/1f2a3a/8cb0d4?text=Transandantal",
+            audio: "transandantal.mp3"
+        },
+        farkindalik: {
+            text: "🌿 Farkındalık Meditasyonu – Şimdiki anı yargısızca gözlemleyin. Duyularınızı (ses, koku, dokunma) kullanarak anda kalın.",
+            emoji: "🌿",
+            media: "https://via.placeholder.com/600x338/2a3a1f/a0d48c?text=Farkındalık",
+            audio: "farkindalik.mp3"
+        }
+    };
 
- let currentAudio = null;
+    // ---------- DOM ELEMANLARI ----------
+    const displayMedia = document.getElementById('displayMedia');
+    const displayEmoji = document.getElementById('displayEmoji');
+    const displayText = document.getElementById('displayText');
+    const audioDot = document.getElementById('audioDot');
+    const audioLabel = document.getElementById('audioLabel');
+    const contentBox = document.getElementById('contentBox');
 
- function openMeditation(type) {
- if (currentAudio) {
- currentAudio.pause();
- currentAudio.currentTime = 0;
- }
+    let currentAudio = null;
+    let currentMed = null;
 
- const data = meditations[type];
- const mediaElement = document.getElementById('displayMedia');
- document.getElementById('displayEmoji').innerHTML = data.emoji;
- document.getElementById('displayText').innerHTML = data.text;
- 
- if (data.media) {
- mediaElement.src = data.media;
- mediaElement.style.display = 'block';
- } else {
- mediaElement.style.display = 'none';
- }
- 
- if (data.audio) {
- currentAudio = new Audio(data.audio);
- currentAudio.play().catch(e => console.log("Ses dosyası çalınamadı."));
- }
- }
+    // ---------- MEDİTASYONU AÇ ----------
+    function openMeditation(type) {
+        // Eski sesi durdur
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            currentAudio = null;
+        }
 
- document.getElementById('commentForm').addEventListener('submit', function(e) {
- e.preventDefault();
- alert("Yorumunuz başarıyla gönderildi!");
- this.reset();
- });
+        const data = meditations[type];
+        if (!data) return;
 
- document.getElementById('questionForm').addEventListener('submit', function(e) {
- e.preventDefault();
- alert("Sorunuz başarıyla iletildi!");
- this.reset();
- });
-</script>
+        currentMed = type;
 
-</body>
-</html>
+        // Görsel
+        displayMedia.src = data.media || 'https://via.placeholder.com/600x338/2a2a4a/7a7aaa?text=Görsel+Hazırlanıyor';
+        displayMedia.alt = data.text.substring(0, 30);
+        displayMedia.classList.remove('wave-active');
+        
+        // Emoji ve metin
+        displayEmoji.textContent = data.emoji || '🧘';
+        displayEmoji.classList.add('pulse');
+        displayText.textContent = data.text;
 
-```
+        // Arka plan rengini hafif değiştir (keyfe)
+        const hue = (type.length * 30) % 360;
+        contentBox.style.background = `radial-gradient(circle at 30% 30%, rgba(${hue}, 80, 120, 0.15), #121225)`;
+
+        // Ses durumu
+        audioDot.className = 'dot';
+        audioLabel.textContent = 'Ses yükleniyor...';
+
+        // Ses dosyasını dene
+        if (data.audio) {
+            currentAudio = new Audio(data.audio);
+            currentAudio.oncanplay = function() {
+                audioDot.className = 'dot active';
+                audioLabel.textContent = '🔊 Ses çalıyor';
+                displayMedia.classList.add('wave-active');
+            };
+            currentAudio.onerror = function() {
+                audioDot.className = 'dot';
+                audioLabel.textContent = '⚠️ Ses dosyası bulunamadı (MP3 ekleyin)';
+                // Yine de görsel animasyon devam etsin
+                displayMedia.classList.add('wave-active');
+            };
+            currentAudio.play().catch(err => {
+                // Otomatik oynatma engellenirse veya dosya yoksa
+                audioDot.className = 'dot';
+                audioLabel.textContent = '🔇 Ses çalınamadı (manuel başlat gerekebilir)';
+                displayMedia.classList.add('wave-active');
+            });
+        } else {
+            audioDot.className = 'dot';
+            audioLabel.textContent = '🎵 Ses eklenmemiş';
+        }
+
+        // Butonlara aktiflik efekti (isteğe bağlı)
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.style.background = (btn.dataset.med === type) ? 'var(--accent-color)' : 'var(--border-color)';
+            btn.style.color = (btn.dataset.med === type) ? '#000' : '#eee';
+        });
+    }
+
+    // ---------- BUTONLARA TIKLAMA ----------
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const type = this.dataset.med;
+            if (type) openMeditation(type);
+        });
+    });
+
+    // ---------- FORM GÖNDERİMLERİ ----------
+    document.getElementById('commentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('comE
