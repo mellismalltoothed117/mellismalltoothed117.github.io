@@ -1,61 +1,11 @@
  <a href="burclar.html">Burçlar</a>
  <a href="yoga.html">Yoga</a>
-
-<body> <button id="installBtn" style="background:#a78bfa;color:#000;border:none;padding:12px 20px;border-radius:30px;font-weight:bold;font-size:1rem;width:100%;cursor:pointer;">
-    📲 Uygulamayı Telefonuna Ekle
-</button>
-<script>
-    // PWA kurulum butonu
-    let deferredPrompt;
-    const installBtn = document.getElementById('installBtn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        installBtn.style.display = 'block';
-    });
-
-    installBtn.addEventListener('click', async () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const result = await deferredPrompt.userChoice;
-            if (result.outcome === 'accepted') {
-                alert('Uygulama başarıyla eklendi! 🎉');
-            } else {
-                alert('Kurulum iptal edildi.');
-            }
-            deferredPrompt = null;
-        } else {
-            // iOS veya desteklenmeyen tarayıcı için yönlendirme
-            alert('Lütfen tarayıcı menüsünden "Ana ekrana ekle" seçeneğini kullanın.\n(Safari: Paylaş > Ana Ekrana Ekle)');
-        }
-    });
-
-    // iOS için butonu gizle (çünkü beforeinstallprompt çalışmaz)
-    if (navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad')) {
-        installBtn.style.display = 'block';
-        installBtn.textContent = '📲 iOS: Paylaş > Ana Ekrana Ekle';
-    }
-</script>
-
-</body>
-<hed>
- <!-- PWA için gerekli meta etiketleri -->
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0b0b1a">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="apple-touch-icon" href="icon-192.png">
-{
-  "   </hed>
-
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Yoga & Meditasyon</title>
+    <title>Astroloji</title>
     
     <!-- PWA Meta -->
     <link rel="manifest" href="manifest.json">
@@ -65,605 +15,104 @@
     <link rel="apple-touch-icon" href="icon-192.png">
     
     <style>
-        :root {
-            --bg: #0b0b1a;
-            --card: #18182a;
-            --text: #eaeaff;
-            --accent: #a78bfa;
-            --secondary: #34d399;
-            --border: #2d2d4a;
-            --radius: 20px;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
+            margin: 0;
             padding: 20px;
+            background: #0b0b1a;
+            color: #eaeaff;
+            font-family: Arial, sans-serif;
+            text-align: center;
             padding-bottom: 100px;
         }
         .container {
-            max-width: 820px;
-            width: 100%;
-            background: var(--card);
-            padding: 25px 20px;
-            border-radius: var(--radius);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.7);
-            border: 1px solid var(--border);
+            max-width: 600px;
+            margin: 0 auto;
+            background: #18182a;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #2d2d4a;
         }
         h1 {
-            font-size: 2.2rem;
-            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #a78bfa, #34d399);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 4px;
-        }
-        .sub {
-            font-size: 0.95rem;
-            color: #b0b0d0;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 14px;
-            margin-bottom: 16px;
-        }
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            gap: 10px;
-            margin: 12px 0 20px;
         }
         .btn {
-            background: var(--border);
-            color: #eee;
-            border: none;
-            padding: 12px 6px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.25s;
-        }
-        .btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            background: var(--accent);
+            background: #a78bfa;
             color: #000;
-        }
-        .content-box {
-            background: #121225;
-            border-radius: var(--radius);
-            padding: 25px 20px;
-            border: 1px solid var(--border);
-            margin: 15px 0 25px;
-            min-height: 200px;
-            text-align: center;
-        }
-        #displayEmoji { font-size: 3.8rem; }
-        #displayTitle { font-size: 1.4rem; font-weight: 700; color: var(--secondary); margin: 8px 0; }
-        #displayText { font-size: 1rem; line-height: 1.6; color: #d0d0f0; }
-        .form-box {
-            background: #10101f;
-            border-radius: var(--radius);
-            padding: 18px 20px;
-            margin-top: 22px;
-            border: 1px solid var(--border);
-        }
-        .form-box h3 {
-            color: var(--secondary);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-        label {
-            display: block;
-            font-size: 0.8rem;
-            color: #b0b0d0;
-            margin: 8px 0 3px;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px 14px;
-            background: #1e1e38;
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            color: #fff;
-            font-size: 0.9rem;
-            margin-bottom: 6px;
-        }
-        input:focus, textarea:focus {
-            border-color: var(--accent);
-            outline: none;
-        }
-        textarea { border-radius: 18px; min-height: 70px; resize: vertical; }
-        .btn-submit {
-            background: var(--accent);
-            color: #000;
-            font-weight: 700;
-            padding: 12px;
             border: none;
-            border-radius: 40px;
-            width: 100%;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
             font-size: 1rem;
             cursor: pointer;
-            transition: 0.25s;
-            margin-top: 6px;
+            margin: 10px;
         }
-        .btn-submit:hover { background: var(--secondary); }
-        .home-link {
-            display: inline-block;
-            margin-top: 16px;
-            color: #8888bb;
-            text-decoration: none;
-            font-size: 0.85rem;
-            border-bottom: 1px dotted #555;
-        }
-        .home-link:hover { color: var(--accent); }
-        @media (max-width: 480px) {
-            .container { padding: 16px 12px; }
-            h1 { font-size: 1.7rem; }
-            .menu-grid { grid-template-columns: repeat(3,1fr); }
-            .btn { font-size: 0.7rem; padding: 10px 4px; }
+        .btn:hover {
+            background: #34d399;
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <h1>🧘 Yoga & Meditasyon</h1>
-    <div class="sub">Sesli rehber, görsel slayt ve yazılı talimatlarla</div>
-
-    <div class="menu-grid">
-        <button class="btn" onclick="openMeditation('sabah')">🌅 Sabah</button>
-        <button class="btn" onclick="openMeditation('gece')">🌙 Gece</button>
-        <button class="btn" onclick="openMeditation('nefes')">🌬️ Nefes</button>
-        <button class="btn" onclick="openMeditation('chakra')">🌈 Çakra</button>
-        <button class="btn" onclick="openMeditation('odak')">🎯 Odak</button>
-        <button class="btn" onclick="openMeditation('metta')">💖 Metta</button>
+    <div class="container">
+        <h1>🌟 Astroloji</h1>
+        <p>Hoş geldin! Uygulamayı telefonuna eklemek için aşağıdaki butonu kullan.</p>
+        <button class="btn" id="installBtn">📲 Uygulamayı Ekle</button>
     </div>
 
-    <div class="content-box" id="contentBox">
-        <div id="displayEmoji">🧘</div>
-        <div id="displayTitle">Hoş Geldin</div>
-        <div id="displayText">Bir meditasyon seç ve başla.</div>
+    <!-- PWA KURULUM BANNER'İ (Otomatik görünür) -->
+    <div id="pwa-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#1a1a2e; padding:16px 20px; border-top:3px solid #a78bfa; text-align:center; z-index:9999;">
+        <p style="margin:0 0 10px; color:#fff; font-size:1rem;">📱 <strong>Bu uygulamayı cihazına eklemek ister misin?</strong></p>
+        <button id="installBannerBtn" style="background:#a78bfa; color:#000; border:none; padding:12px 28px; border-radius:40px; font-weight:bold; font-size:1rem; cursor:pointer;">✅ Evet, Ekle</button>
+        <button id="closeBanner" style="background:transparent; color:#999; border:1px solid #444; padding:12px 24px; border-radius:40px; cursor:pointer;">❌ Kapat</button>
     </div>
 
-    <div class="form-box">
-        <h3>💬 Yorum Yap</h3>
-        <form id="commentForm">
-            <label>Adınız *</label>
-            <input type="text" id="comName" required placeholder="Ad">
-            <label>E-posta (gizli)</label>
-            <input type="email" id="comEmail" required placeholder="ornek@mail.com">
-            <label>Yorumunuz *</label>
-            <textarea id="comText" rows="3" required placeholder="Düşünceleriniz..."></textarea>
-            <button class="btn-submit" type="submit">Gönder</button>
-        </form>
-    </div>
+    <script>
+        // PWA KURULUM
+        let deferredPrompt;
+        const banner = document.getElementById('pwa-banner');
+        const installBannerBtn = document.getElementById('installBannerBtn');
+        const installBtn = document.getElementById('installBtn');
+        const closeBtn = document.getElementById('closeBanner');
 
-    <a href="index.html" class="home-link">🏠 Ana Sayfaya Dön</a>
-</div>
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            banner.style.display = 'block';
+        });
 
-<!-- ========== PWA KURULUM BANNER'İ ========== -->
-<div id="pwa-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#1a1a2e; padding:16px 20px; border-top:3px solid #a78bfa; text-align:center; z-index:9999; box-shadow:0 -4px 20px rgba(0,0,0,0.5);">
-    <p style="margin:0 0 10px; color:#fff; font-size:1rem; font-weight:500;">
-        📱 <strong>Bu uygulamayı cihazına eklemek ister misin?</strong>
-    </p>
-    <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
-        <button id="installBtn" style="background:#a78bfa; color:#000; border:none; padding:12px 28px; border-radius:40px; font-weight:700; font-size:1rem; cursor:pointer; box-shadow:0 4px 12px rgba(167,139,250,0.3);">
-            ✅ Evet, Ekle
-        </button>
-        <button id="closeBanner" style="background:transparent; color:#999; border:1px solid #444; padding:12px 24px; border-radius:40px; font-weight:500; cursor:pointer;">
-            ❌ Kapat
-        </button>
-    </div>
-    <p style="margin:8px 0 0; font-size:0.75rem; color:#888;">Android • iOS • Windows • Mac — hepsinde çalışır</p>
-</div>
-
-<script>
-    // ---------- MEDİTASYON VERİLERİ ----------
-    const meditations = {
-        sabah: { title: "☀️ Sabah Meditasyonu", text: "Rahat bir pozisyonda otur.\n3 derin nefes al.\nBugün için niyet belirle.\n5 dakika nefesini izle.", emoji: "🌅" },
-        gece: { title: "🌙 Gece Meditasyonu", text: "Sırt üstü uzan.\nBedenini baştan ayağa gevşet.\nHer nefeste daha da rahatla.\n10 dakika bu halde kal.", emoji: "🌙" },
-        nefes: { title: "🌬️ 4-7-8 Nefes", text: "4 sn nefes al.\n7 sn tut.\n8 sn ver.\n4-8 kez tekrarla.", emoji: "🌬️" },
-        chakra: { title: "🌈 Çakra Denge", text: "Kök → kırmızı\nSakral → turuncu\nSolar → sarı\nKalp → yeşil\nBoğaz → mavi\n3. Göz → indigo\nTaç → mor", emoji: "🌈" },
-        odak: { title: "🎯 Derin Odak", text: "Bir nokta seç (nefes, ses, görüntü).\nDikkatini oraya ver.\nDağıldığında tekrar dön.\n5 dakika devam et.", emoji: "🎯" },
-        metta: { title: "💖 Metta (Sevgi)", text: "Kendine sevgi gönder.\nSevdiklerine gönder.\nTanımadıklarına gönder.\nTüm canlılara gönder.", emoji: "💖" }
-    };
-
-    function openMeditation(type) {
-        const data = meditations[type];
-        if (!data) return;
-        document.getElementById('displayEmoji').textContent = data.emoji;
-        document.getElementById('displayTitle').textContent = data.title;
-        document.getElementById('displayText').textContent = data.text;
-    }
-
-    // ---------- FORM ----------
-    document.getElementById('commentForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('comEmail').value;
-        if (!email.includes('@')) { alert('Geçerli e-posta girin.'); return; }
-        alert('💬 Yorumunuz gönderildi!');
-        this.reset();
-    });
-
-    // ========== PWA KURULUM SİSTEMİ (ÇALIŞIR) ==========
-    let deferredPrompt;
-    const banner = document.getElementById('pwa-banner');
-    const installBtn = document.getElementById('installBtn');
-    const closeBtn = document.getElementById('closeBanner');
-
-    // Android Chrome: beforeinstallprompt
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        banner.style.display = 'block';
-    });
-
-    // Kurulum butonu
-    installBtn.addEventListener('click', async () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const result = await deferredPrompt.userChoice;
-            if (result.outcome === 'accepted') {
-                alert('🎉 Uygulama başarıyla eklendi! Ana ekranda bulabilirsin.');
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((result) => {
+                    if (result.outcome === 'accepted') {
+                        alert('🎉 Uygulama başarıyla eklendi!');
+                    }
+                    deferredPrompt = null;
+                    banner.style.display = 'none';
+                });
             } else {
-                alert('Kurulum iptal edildi.');
-            }
-            deferredPrompt = null;
-            banner.style.display = 'none';
-        } else {
-            const ua = navigator.userAgent;
-            if (ua.includes('iPhone') || ua.includes('iPad')) {
-                alert('📲 iOS: "Paylaş" > "Ana Ekrana Ekle" ile ekleyebilirsin.');
-            } else if (ua.includes('Windows')) {
-                alert('🖥️ Windows: Chrome/Edge adres çubuğundaki "+" simgesine tıkla.');
-            } else if (ua.includes('Mac')) {
-                alert('🍎 Mac: Safari menüsünden "Ana Ekrana Ekle" seçeneğini kullan.');
-            } else {
-                alert('⚠️ Tarayıcı PWA kurulumunu desteklemiyor.\nLütfen Chrome ile açıp tekrar dene.');
+                alert('Lütfen Chrome menüsünden "Ana ekrana ekle" seçeneğini kullanın.');
             }
         }
-    });
 
-    // Banner'ı kapat
-    closeBtn.addEventListener('click', () => {
-        banner.style.display = 'none';
-    });
+        installBtn.addEventListener('click', installApp);
+        installBannerBtn.addEventListener('click', installApp);
 
-    // Uygulama kurulduğunda banner'ı gizle
-    window.addEventListener('appinstalled', () => {
-        banner.style.display = 'none';
-        console.log('✅ Uygulama kuruldu!');
-    });
+        closeBtn.addEventListener('click', () => {
+            banner.style.display = 'none';
+        });
 
-    // iOS'ta banner'ı göster
-    if (navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad')) {
-        banner.style.display = 'block';
-        installBtn.textContent = '📲 iOS: Paylaş > Ana Ekrana Ekle';
-    }
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            banner.style.display = 'none';
+        }
 
-    // Eğer zaten standalone modda çalışıyorsa banner'ı gizle (uygulama açık)
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-        banner.style.display = 'none';
-    }
-
-    // Service Worker kaydet (sw.js dosyası aynı klasörde olmalı)
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js')
-            .then(() => console.log('✅ Service Worker kaydedildi.'))
-            .catch(() => console.log('⚠️ Service Worker kaydedilemedi.'));
-    }
-</script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('✅ Service Worker kaydedildi.'))
+                .catch(() => console.log('⚠️ Service Worker kaydedilemedi.'));
+        }
+    </script>
 </body>
 </html>
-
-
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Yoga & Meditasyon</title>
-    
-    <!-- PWA Meta -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0b0b1a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="icon-192.png">
-    
-    <style>
-        :root {
-            --bg: #0b0b1a;
-            --card: #18182a;
-            --text: #eaeaff;
-            --accent: #a78bfa;
-            --secondary: #34d399;
-            --border: #2d2d4a;
-            --radius: 20px;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-            padding-bottom: 120px;
-        }
-        .container {
-            max-width: 820px;
-            width: 100%;
-            background: var(--card);
-            padding: 25px 20px;
-            border-radius: var(--radius);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.7);
-            border: 1px solid var(--border);
-        }
-        h1 {
-            font-size: 2.2rem;
-            background: linear-gradient(135deg, var(--accent), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 4px;
-        }
-        .sub {
-            font-size: 0.95rem;
-            color: #b0b0d0;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 14px;
-            margin-bottom: 16px;
-        }
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            gap: 10px;
-            margin: 12px 0 20px;
-        }
-        .btn {
-            background: var(--border);
-            color: #eee;
-            border: none;
-            padding: 12px 6px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.25s;
-        }
-        .btn:hover {
-            transform: translateY(-3px);
-            background: var(--accent);
-            color: #000;
-        }
-        .content-box {
-            background: #121225;
-            border-radius: var(--radius);
-            padding: 25px 20px;
-            border: 1px solid var(--border);
-            margin: 15px 0 25px;
-            min-height: 200px;
-            text-align: center;
-        }
-        #displayEmoji { font-size: 3.8rem; }
-        #displayTitle { font-size: 1.4rem; font-weight: 700; color: var(--secondary); margin: 8px 0; }
-        #displayText { font-size: 1rem; line-height: 1.6; color: #d0d0f0; white-space: pre-line; }
-        .form-box {
-            background: #10101f;
-            border-radius: var(--radius);
-            padding: 18px 20px;
-            margin-top: 22px;
-            border: 1px solid var(--border);
-        }
-        .form-box h3 {
-            color: var(--secondary);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-        label { display: block; font-size: 0.8rem; color: #b0b0d0; margin: 8px 0 3px; }
-        input, textarea {
-            width: 100%;
-            padding: 10px 14px;
-            background: #1e1e38;
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            color: #fff;
-            font-size: 0.9rem;
-            margin-bottom: 6px;
-        }
-        input:focus, textarea:focus { border-color: var(--accent); outline: none; }
-        textarea { border-radius: 18px; min-height: 70px; resize: vertical; }
-        .btn-submit {
-            background: var(--accent);
-            color: #000;
-            font-weight: 700;
-            padding: 12px;
-            border: none;
-            border-radius: 40px;
-            width: 100%;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.25s;
-            margin-top: 6px;
-        }
-        .btn-submit:hover { background: var(--secondary); }
-        .home-link {
-            display: inline-block;
-            margin-top: 16px;
-            color: #8888bb;
-            text-decoration: none;
-            font-size: 0.85rem;
-            border-bottom: 1px dotted #555;
-        }
-        .home-link:hover { color: var(--accent); }
-        @media (max-width: 480px) {
-            .container { padding: 16px 12px; }
-            h1 { font-size: 1.7rem; }
-            .menu-grid { grid-template-columns: repeat(3,1fr); }
-            .btn { font-size: 0.7rem; padding: 10px 4px; }
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>🧘 Yoga & Meditasyon</h1>
-    <div class="sub">Sesli rehber, görsel slayt ve yazılı talimatlarla</div>
-
-    <div class="menu-grid">
-        <button class="btn" onclick="openMeditation('sabah')">🌅 Sabah</button>
-        <button class="btn" onclick="openMeditation('gece')">🌙 Gece</button>
-        <button class="btn" onclick="openMeditation('nefes')">🌬️ Nefes</button>
-        <button class="btn" onclick="openMeditation('chakra')">🌈 Çakra</button>
-        <button class="btn" onclick="openMeditation('odak')">🎯 Odak</button>
-        <button class="btn" onclick="openMeditation('metta')">💖 Metta</button>
-    </div>
-
-    <div class="content-box" id="contentBox">
-        <div id="displayEmoji">🧘</div>
-        <div id="displayTitle">Hoş Geldin</div>
-        <div id="displayText">Bir meditasyon seç ve başla.</div>
-    </div>
-
-    <div class="form-box">
-        <h3>💬 Yorum Yap</h3>
-        <form id="commentForm">
-            <label>Adınız *</label>
-            <input type="text" id="comName" required placeholder="Ad">
-            <label>E-posta (gizli)</label>
-            <input type="email" id="comEmail" required placeholder="ornek@mail.com">
-            <label>Yorumunuz *</label>
-            <textarea id="comText" rows="3" required placeholder="Düşünceleriniz..."></textarea>
-            <button class="btn-submit" type="submit">Gönder</button>
-        </form>
-    </div>
-
-    <a href="index.html" class="home-link">🏠 Ana Sayfaya Dön</a>
-</div>
-
-<!-- ========== PWA KURULUM BANNER'İ ========== -->
-<div id="pwa-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#1a1a2e; padding:16px 20px; border-top:3px solid #a78bfa; text-align:center; z-index:9999; box-shadow:0 -4px 20px rgba(0,0,0,0.5);">
-    <p style="margin:0 0 10px; color:#fff; font-size:1rem; font-weight:500;">
-        📱 <strong>Bu uygulamayı cihazına eklemek ister misin?</strong>
-    </p>
-    <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
-        <button id="installBtn" style="background:#a78bfa; color:#000; border:none; padding:12px 28px; border-radius:40px; font-weight:700; font-size:1rem; cursor:pointer; box-shadow:0 4px 12px rgba(167,139,250,0.3);">
-            ✅ Evet, Ekle
-        </button>
-        <button id="closeBanner" style="background:transparent; color:#999; border:1px solid #444; padding:12px 24px; border-radius:40px; font-weight:500; cursor:pointer;">
-            ❌ Kapat
-        </button>
-    </div>
-    <p style="margin:8px 0 0; font-size:0.75rem; color:#888;">Android • iOS • Windows • Mac — hepsinde çalışır</p>
-</div>
-
-<script>
-    // ---------- MEDİTASYON VERİLERİ ----------
-    const meditations = {
-        sabah: { title: "☀️ Sabah Meditasyonu", text: "Rahat bir pozisyonda otur.\n3 derin nefes al.\nBugün için niyet belirle.\n5 dakika nefesini izle.", emoji: "🌅" },
-        gece: { title: "🌙 Gece Meditasyonu", text: "Sırt üstü uzan.\nBedenini baştan ayağa gevşet.\nHer nefeste daha da rahatla.\n10 dakika bu halde kal.", emoji: "🌙" },
-        nefes: { title: "🌬️ 4-7-8 Nefes", text: "4 sn nefes al.\n7 sn tut.\n8 sn ver.\n4-8 kez tekrarla.", emoji: "🌬️" },
-        chakra: { title: "🌈 Çakra Denge", text: "Kök → kırmızı\nSakral → turuncu\nSolar → sarı\nKalp → yeşil\nBoğaz → mavi\n3. Göz → indigo\nTaç → mor", emoji: "🌈" },
-        odak: { title: "🎯 Derin Odak", text: "Bir nokta seç (nefes, ses, görüntü).\nDikkatini oraya ver.\nDağıldığında tekrar dön.\n5 dakika devam et.", emoji: "🎯" },
-        metta: { title: "💖 Metta (Sevgi)", text: "Kendine sevgi gönder.\nSevdiklerine gönder.\nTanımadıklarına gönder.\nTüm canlılara gönder.", emoji: "💖" }
-    };
-
-    function openMeditation(type) {
-        const data = meditations[type];
-        if (!data) return;
-        document.getElementById('displayEmoji').textContent = data.emoji;
-        document.getElementById('displayTitle').textContent = data.title;
-        document.getElementById('displayText').textContent = data.text;
-    }
-
-    // ---------- FORM ----------
-    document.getElementById('commentForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('comEmail').value;
-        if (!email.includes('@')) { alert('Geçerli e-posta girin.'); return; }
-        alert('💬 Yorumunuz gönderildi!');
-        this.reset();
-    });
-
-    // ========== PWA KURULUM SİSTEMİ (ÇALIŞIR) ==========
-    let deferredPrompt;
-    const banner = document.getElementById('pwa-banner');
-    const installBtn = document.getElementById('installBtn');
-    const closeBtn = document.getElementById('closeBanner');
-
-    // Android Chrome: beforeinstallprompt
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        banner.style.display = 'block';
-        console.log('✅ Kurulum banner\'ı gösteriliyor.');
-    });
-
-    // Kurulum butonu
-    installBtn.addEventListener('click', async () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const result = await deferredPrompt.userChoice;
-            if (result.outcome === 'accepted') {
-                alert('🎉 Uygulama başarıyla eklendi! Ana ekranda bulabilirsin.');
-            } else {
-                alert('Kurulum iptal edildi.');
-            }
-            deferredPrompt = null;
-            banner.style.display = 'none';
-        } else {
-            // iOS ve diğer platformlar için yönlendirme
-            const ua = navigator.userAgent;
-            if (ua.includes('iPhone') || ua.includes('iPad')) {
-                alert('📲 iOS: "Paylaş" > "Ana Ekrana Ekle" ile ekleyebilirsin.');
-            } else if (ua.includes('Windows')) {
-                alert('🖥️ Windows: Chrome/Edge adres çubuğundaki "+" simgesine tıkla.');
-            } else if (ua.includes('Mac')) {
-                alert('🍎 Mac: Safari menüsünden "Ana Ekrana Ekle" seçeneğini kullan.');
-            } else {
-                alert('⚠️ Tarayıcı PWA kurulumunu desteklemiyor.\nLütfen Chrome ile açıp tekrar dene.');
-            }
-        }
-    });
-
-    // Banner'ı kapat
-    closeBtn.addEventListener('click', () => {
-        banner.style.display = 'none';
-    });
-
-    // Uygulama kurulduğunda banner'ı gizle
-    window.addEventListener('appinstalled', () => {
-        banner.style.display = 'none';
-        console.log('✅ Uygulama kuruldu!');
-    });
-
-    // iOS'ta banner'ı göster (beforeinstallprompt çalışmaz)
-    if (navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad')) {
-        banner.style.display = 'block';
-        installBtn.textContent = '📲 iOS: Paylaş > Ana Ekrana Ekle';
-    }
-
-    // Eğer zaten standalone modda çalışıyorsa banner'ı gizle (uygulama açık)
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-        banner.style.display = 'none';
-    }
-
-    // Service Worker kaydet (sw.js dosyası aynı klasörde olmalı)
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js')
-            .then(() => console.log('✅ Service Worker kaydedildi.'))
-            .catch(() => console.log('⚠️ Service Worker kaydedilemedi.'));
-    }
-</script>
-</body>
-</html>
-
-
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0b0b1a">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="apple-touch-icon" href="icon-192.png">
