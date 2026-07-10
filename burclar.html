@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎧 Sesli Yoga & Meditasyon</title>
+<style>/* Aynı CSS */</style>
+</head>
+<body>
+<div class="container">
+<h1>🎧 <span>Sesli</span> Yoga & Meditasyon</h1>
+<p class="sub">Rehberli sesli meditasyon ve yoga pratikleri.</p>
+
+<div style="display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin:20px 0;">
+<button class="btn btn-primary" onclick="playAudio('sabah')">🌅 Sabah Meditasyonu</button>
+<button class="btn btn-primary" onclick="playAudio('gece')">🌙 Gece Meditasyonu</button>
+<button class="btn btn-primary" onclick="playAudio('yoga')">🧘‍♀️ Yoga Nidra</button>
+<button class="btn btn-primary" onclick="playAudio('nefes')">🌬️ Nefes Rehberi</button>
+</div>
+
+<div class="fortune-box">
+<div id="fortuneEmoji" style="font-size:3rem;">🎧</div>
+<div id="fortuneText">Bir butona tıkla, sesli rehberi dinle.</div>
+<button class="speaker-btn" id="speakerBtn" style="display:inline-block;">🔊 Sesli Dinle</button>
+</div>
+
+<!-- Yorum Formu -->
+</div>
+<script>
+let currentText='';
+function playAudio(type){
+const texts={
+sabah:'🌅 Sabah Meditasyonu:\n\nGüne başlarken 5 dakika boyunca derin nefes al. Zihnini boşalt, bugünün sana neler getireceğine odaklan. Kendine şu soruyu sor: "Bugün beni ne mutlu edecek?"',
+gece:'🌙 Gece Meditasyonu:\n\nGünün yorgunluğunu bırak. Gözlerini kapat, her nefeste bedeninin gevşediğini hisset. Minnettarlık duy. Uykuya geçmeden önce 3 güzel şey say.',
+yoga:'🧘‍♀️ Yoga Nidra Rehberi:\n\nSırt üstü yat. Nefesini fark et. Her nefeste bedeninin ağırlaştığını hisset. Tüm bedeni taramaya başla: ayaklar, bacaklar, karın, göğüs, kollar, baş. Bütün bedenin serbest kalsın.',
+nefes:'🌬️ Nefes Rehberi:\n\n4-7-8 tekniği: Burnundan 4 saniye nefes al, 7 saniye tut, 8 saniye ağızdan ver. Bunu 3 kez yap. Zihnin sakinleşecek, vücudun gevşeyecek.'
+};
+currentText=texts[type];
+document.getElementById('fortuneEmoji').textContent='🎧';
+document.getElementById('fortuneText').innerHTML=currentText.replace(/\n/g,'<br>');
+}
+document.getElementById('speakerBtn').addEventListener('click',function(){
+if(currentText && 'speechSynthesis' in window){
+const u=new SpeechSynthesisUtterance(currentText);
+u.lang='tr-TR';u.rate=0.85;window.speechSynthesis.cancel();window.speechSynthesis.speak(u);
+}
+});
+</script>
+</body>
+</html>
